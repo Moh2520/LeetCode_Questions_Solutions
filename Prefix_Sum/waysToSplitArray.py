@@ -1,5 +1,5 @@
 class Solution:
-    def waysToSplitArray(self, nums: List[int]) -> int:
+    def waysToSplitArray(self, nums):
         leftSideSum = 0
         rightSideSum = sum(nums)
         validSplits = 0
