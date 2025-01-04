@@ -1,25 +1,48 @@
 class Solution:
     def vowelStrings(self, words, queries):
-        vowels = {"a", "e", "i", "o", "u"}
+
+        vowels = set("aeiou")
+
+        prefix_sum = [0] * (len(words)+1)
+        prev = 0
+        for i, w in enumerate(words):
+            vowl = 0
+
+            if w[0] in vowels and  w[-1] in vowels :
+                prev += 1
+            prefix_sum[i+1] = prev
+            
         
-        # Step 1: Create a prefix sum array
-        prefix = [0] * (len(words) + 1)
-        for i, word in enumerate(words):
-            first = word[0]
-            last = word[-1]
-            # Check if the word is a "vowel string"
-            if first in vowels and last in vowels:
-                prefix[i + 1] = prefix[i] + 1
-            else:
-                prefix[i + 1] = prefix[i]
+        res = [0] * (len(queries))
+
+        for i, q in enumerate(queries):
+            l, r = q
+            print(l)
+            print(r)
+            res[i] = prefix_sum[r+1] - prefix_sum[l]
+        return res        
+
+
+        # vowels = {"a", "e", "i", "o", "u"}
         
-        # Step 2: Answer each query in O(1)
-        result = []
-        for l, r in queries:
-            count = prefix[r + 1] - prefix[l]
-            result.append(count)
+        # # Step 1: Create a prefix sum array
+        # prefix = [0] * (len(words) + 1)
+        # for i, word in enumerate(words):
+        #     first = word[0]
+        #     last = word[-1]
+        #     # Check if the word is a "vowel string"
+        #     if first in vowels and last in vowels:
+        #         prefix[i + 1] = prefix[i] + 1
+        #     else:
+        #         prefix[i + 1] = prefix[i]
         
-        return result
+        # # Step 2: Answer each query in O(1)
+        # result = []
+        # for l, r in queries:
+        #     count = prefix[r + 1] - prefix[l]
+        #     result.append(count)
+        
+        # return result
         # # print(words[0:3])
 
         # v = set(["a", "e", "i", "o", "u",])
