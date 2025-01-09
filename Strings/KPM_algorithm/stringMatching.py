@@ -1,5 +1,5 @@
 class Solution:
-    def stringMatching(self, words: List[str]) -> List[str]:
+    def stringMatching(self, words):
         words = sorted(words, key=len)
         res = []
         for i in range(len(words)):
